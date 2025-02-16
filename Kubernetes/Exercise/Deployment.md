@@ -144,3 +144,6 @@ spec:
     matchLabels:
       app: myapp
 ```
+
+https://uklabs.kodekloud.com/topic/labs-deployments-2/
+
