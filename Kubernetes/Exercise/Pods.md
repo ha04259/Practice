@@ -133,3 +133,4 @@ spec:
           value: mysecretpassword
 ```
 
+https://uklabs.kodekloud.com/topic/labs-familiarize-with-lab-environment-2/
