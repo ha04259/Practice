@@ -133,3 +133,6 @@ spec:
    matchLabels:
      app: myapp
 ```
+
+https://uklabs.kodekloud.com/topic/labs-replica-sets-2/
+
