@@ -375,11 +375,9 @@
 19. **Q:** What is Hyper-V?  
     **A:** Microsoft’s hypervisor for creating
 
-Below are 20 questions and answers for each of the requested topics. Due to space constraints, I’ll provide one topic at a time. Let me know if you’d like me to continue with the next topic.
-
 ---
 
-### **1. Containerization-Docker**  
+### **7. Containerization-Docker**  
 **Q1:** What is the difference between a Docker image and a container?  
 **A1:** An image is a read-only template with instructions to create a container. A container is a running instance of an image.  
 
@@ -442,7 +440,7 @@ Below are 20 questions and answers for each of the requested topics. Due to spac
 
 ---
 
-### **2. Chef and Puppet**  
+### **8. Chef and Puppet**  
 **Q1:** What is the primary difference between Chef and Puppet?  
 **A1:** Chef uses Ruby for its DSL and follows an imperative approach, while Puppet uses a declarative DSL.  
 
@@ -505,7 +503,7 @@ Below are 20 questions and answers for each of the requested topics. Due to spac
 
 ---
 
-### **3. Chaos Monkey**  
+### **9. Chaos Monkey**  
 **Q1:** What is Chaos Monkey?  
 **A1:** A Netflix tool that randomly terminates production instances to test system resilience.  
 
@@ -567,5 +565,3 @@ Below are 20 questions and answers for each of the requested topics. Due to spac
 **A20:** By validating disaster recovery (DR) and business continuity plans.  
 
 ---
-
-Let me know if you’d like me to proceed with **Gradle, Maven, Git, Ansible, and Jenkins** next!
