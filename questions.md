@@ -565,3 +565,382 @@
 **A20:** By validating disaster recovery (DR) and business continuity plans.  
 
 ---
+
+### **10. Gradle**  
+1. **Q:** What is the default build file in Gradle?  
+   **A:** `build.gradle` or `build.gradle.kts` (for Kotlin).  
+
+2. **Q:** How do you define a task in Gradle?  
+   **A:**  
+   ```groovy
+   task myTask {
+       doLast {
+           println "Hello, Gradle!"
+       }
+   }
+   ```
+
+3. **Q:** What is the Gradle wrapper?  
+   **A:** A script that ensures the correct Gradle version is used without manual installation.  
+
+4. **Q:** How do you exclude a dependency in Gradle?  
+   **A:**  
+   ```groovy
+   implementation('group:name') {
+       exclude group: 'unwantedGroup', module: 'unwantedModule'
+   }
+   ```
+
+5. **Q:** What is the command to list all tasks in a project?  
+   **A:** `gradle tasks`  
+
+6. **Q:** Explain the difference between `implementation` and `api` in dependency configurations.  
+   **A:** `api` exposes dependencies to consumers, while `implementation` hides them.  
+
+7. **Q:** What is a Gradle plugin?  
+   **A:** Reusable logic to add features (e.g., Java, Spring Boot support).  
+
+8. **Q:** How do you run a specific task?  
+   **A:** `gradle :taskName`  
+
+9. **Q:** What is the purpose of `settings.gradle`?  
+   **A:** Configures project hierarchy (e.g., subprojects).  
+
+10. **Q:** What is incremental build in Gradle?  
+    **A:** Skips tasks if inputs/outputs haven’t changed, improving performance.  
+
+11. **Q:** How do you force Gradle to re-download dependencies?  
+    **A:** Delete the cache in `~/.gradle/caches/` or run `gradle build --refresh-dependencies`.  
+
+12. **Q:** What is `gradle.properties` used for?  
+    **A:** Configures project-wide settings (e.g., JVM args, version).  
+
+13. **Q:** How do you create a multi-project build?  
+    **A:** Define subprojects in `settings.gradle` using `include 'subprojectName'`.  
+
+14. **Q:** What is the difference between `buildscript` and `allprojects` blocks?  
+    **A:** `buildscript` defines dependencies for the build script itself; `allprojects` applies config to all subprojects.  
+
+15. **Q:** How do you publish artifacts to a Maven repository?  
+    **A:** Use the `maven-publish` plugin and configure `publishing.repositories`.  
+
+16. **Q:** What is the purpose of `gradle init`?  
+    **A:** Generates a new project structure.  
+
+17. **Q:** How do you enable the Kotlin DSL in Gradle?  
+    **A:** Use `build.gradle.kts` instead of `build.gradle`.  
+
+18. **Q:** What is a `BuildListener` in Gradle?  
+    **A:** A callback to react to build lifecycle events (e.g., task execution).  
+
+19. **Q:** How do you configure a project to use a specific Java version?  
+    **A:**  
+    ```groovy
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(17)
+        }
+    }
+    ```
+
+20. **Q:** What is the difference between `gradle assemble` and `gradle build`?  
+    **A:** `assemble` compiles code and packages artifacts; `build` also runs tests.  
+
+---
+
+### **11. Maven**  
+1. **Q:** What is the default build file in Maven?  
+   **A:** `pom.xml`.  
+
+2. **Q:** What are the three main phases of the Maven lifecycle?  
+   **A:** `clean`, `default` (build), `site`.  
+
+3. **Q:** What is the command to create a new project?  
+   **A:** `mvn archetype:generate`.  
+
+4. **Q:** How do you exclude a dependency?  
+   **A:**  
+   ```xml
+   <exclusions>
+       <exclusion>
+           <groupId>...</groupId>
+           <artifactId>...</artifactId>
+       </exclusion>
+   </exclusions>
+   ```
+
+5. **Q:** What is the difference between `SNAPSHOT` and release versions?  
+   **A:** `SNAPSHOT` denotes a work-in-progress; releases are stable.  
+
+6. **Q:** What is the purpose of `mvn install`?  
+   **A:** Builds the project and installs the artifact to the local repository.  
+
+7. **Q:** Explain dependency scopes: `compile`, `test`, `provided`.  
+   **A:**  
+   - `compile`: Available in all classpaths.  
+   - `test`: Only for testing.  
+   - `provided`: Provided by the runtime (e.g., Servlet API).  
+
+8. **Q:** What is a Maven plugin?  
+   **A:** Extends Maven’s functionality (e.g., `maven-surefire-plugin` for tests).  
+
+9. **Q:** What is the default packaging type?  
+   **A:** `jar`.  
+
+10. **Q:** How do you skip tests during a build?  
+    **A:** `mvn install -DskipTests`.  
+
+11. **Q:** What is the purpose of the `dependencyManagement` section?  
+    **A:** Centralizes dependency versions for child modules.  
+
+12. **Q:** What is a transitive dependency?  
+    **A:** Dependencies of your dependencies, automatically included.  
+
+13. **Q:** How do you resolve a dependency conflict?  
+    **A:** Use `<dependencyManagement>` or explicitly exclude conflicting versions.  
+
+14. **Q:** What is the `settings.xml` file?  
+    **A:** Configures global or user-specific Maven settings (e.g., repositories, proxies).  
+
+15. **Q:** What is the difference between `mvn package` and `mvn deploy`?  
+    **A:** `package` creates the artifact; `deploy` uploads it to a remote repository.  
+
+16. **Q:** How do you add a remote repository?  
+    **A:** Define it in `pom.xml` under `<repositories>`.  
+
+17. **Q:** What is a Maven profile?  
+    **A:** A set of configurations activated based on conditions (e.g., environment).  
+
+18. **Q:** What is the `effective POM`?  
+    **A:** The final POM after merging parent and child configurations.  
+
+19. **Q:** How do you list all dependencies in a project?  
+    **A:** `mvn dependency:tree`.  
+
+20. **Q:** What is the purpose of the `mvn clean` command?  
+    **A:** Deletes the `target` directory.  
+
+---
+
+### **12. GIT**  
+1. **Q:** What is the command to initialize a Git repository?  
+   **A:** `git init`.  
+
+2. **Q:** How do you stage all changes for commit?  
+   **A:** `git add .`  
+
+3. **Q:** What is the difference between `git fetch` and `git pull`?  
+   **A:** `fetch` retrieves changes but doesn’t merge; `pull` does `fetch` + `merge`.  
+
+4. **Q:** How do you create and switch to a new branch?  
+   **A:** `git checkout -b branchName`.  
+
+5. **Q:** What is a merge conflict, and how do you resolve it?  
+   **A:** Occurs when changes conflict; resolve by editing files, then `git add` and `git commit`.  
+
+6. **Q:** What is `git rebase`?  
+   **A:** Rewrites commit history by moving branches to a new base commit.  
+
+7. **Q:** How do you undo the last commit?  
+   **A:** `git reset HEAD~1` (soft reset) or `git reset --hard HEAD~1` (discard changes).  
+
+8. **Q:** What is the purpose of `.gitignore`?  
+   **A:** Specifies files/directories to exclude from version control.  
+
+9. **Q:** How do you view the commit history?  
+   **A:** `git log`.  
+
+10. **Q:** What is a detached HEAD state?  
+    **A:** When you check out a commit directly instead of a branch.  
+
+11. **Q:** How do you delete a remote branch?  
+    **A:** `git push origin --delete branchName`.  
+
+12. **Q:** What is `git stash`?  
+    **A:** Temporarily saves uncommitted changes.  
+
+13. **Q:** How do you revert a specific commit?  
+    **A:** `git revert commitHash`.  
+
+14. **Q:** What is the difference between `git reset` and `git revert`?  
+    **A:** `reset` moves the HEAD pointer; `revert` creates a new commit undoing changes.  
+
+15. **Q:** What is a `fast-forward` merge?  
+    **A:** Merging by moving a branch pointer forward without creating a merge commit.  
+
+16. **Q:** How do you tag a commit?  
+    **A:** `git tag -a v1.0 -m "Message" commitHash`.  
+
+17. **Q:** What is `git cherry-pick`?  
+    **A:** Applies a specific commit from one branch to another.  
+
+18. **Q:** How do you configure Git to use a proxy?  
+    **A:**  
+    ```bash
+    git config --global http.proxy http://proxy.example.com:8080
+    ```
+
+19. **Q:** What is `git bisect`?  
+    **A:** Helps find the commit that introduced a bug via binary search.  
+
+20. **Q:** How do you clone a remote repository?  
+    **A:** `git clone https://github.com/user/repo.git`.  
+
+---
+
+### **13. Ansible**  
+1. **Q:** What is an Ansible playbook?  
+   **A:** A YAML file defining automation tasks.  
+
+2. **Q:** How do you run a playbook?  
+   **A:** `ansible-playbook playbook.yml`.  
+
+3. **Q:** What is an inventory file?  
+   **A:** Lists managed hosts/groups (e.g., `/etc/ansible/hosts`).  
+
+4. **Q:** What is the difference between `ansible` and `ansible-playbook`?  
+   **A:** `ansible` runs ad-hoc commands; `ansible-playbook` executes playbooks.  
+
+5. **Q:** How do you define variables in a playbook?  
+   **A:**  
+   ```yaml
+   vars:
+     my_var: "value"
+   ```
+
+6. **Q:** What is an Ansible role?  
+   **A:** Reusable collection of tasks, variables, and handlers.  
+
+7. **Q:** What is idempotency in Ansible?  
+   **A:** Running a task multiple times has the same effect as running it once.  
+
+8. **Q:** How do you handle secrets in Ansible?  
+   **A:** Use `ansible-vault` to encrypt files.  
+
+9. **Q:** What is a handler?  
+   **A:** A task triggered by `notify` (e.g., restarting a service).  
+
+10. **Q:** What is the `become` keyword?  
+    **A:** Escalates privileges (e.g., `sudo`).  
+
+11. **Q:** How do you test a playbook without executing it?  
+    **A:** `ansible-playbook --check playbook.yml`.  
+
+12. **Q:** What is the purpose of the `gather_facts` task?  
+    **A:** Collects system information (e.g., OS, IP).  
+
+13. **Q:** How do you loop over items in a task?  
+    **A:**  
+    ```yaml
+    loop:
+      - item1
+      - item2
+    ```
+
+14. **Q:** What is the `ansible.cfg` file?  
+    **A:** Configures Ansible settings (e.g., inventory path).  
+
+15. **Q:** What is the difference between `shell` and `command` modules?  
+    **A:** `shell` runs commands in a shell (supports pipes/variables); `command` runs directly.  
+
+16. **Q:** How do you create a dynamic inventory?  
+    **A:** Use scripts that output JSON (e.g., AWS EC2 inventory script).  
+
+17. **Q:** What is a Jinja2 template in Ansible?  
+    **A:** A file with variables populated by Ansible (e.g., `template` module).  
+
+18. **Q:** How do you conditionally run a task?  
+    **A:** Use `when`:  
+    ```yaml
+    when: ansible_os_family == "Debian"
+    ```
+
+19. **Q:** What is the `debug` module used for?  
+    **A:** Prints variables or messages during execution.  
+
+20. **Q:** How do you install a package using Ansible?  
+    **A:** Use the `apt` (Debian) or `yum` (RHEL) module:  
+    ```yaml
+    - name: Install nginx
+      apt:
+        name: nginx
+        state: present
+    ```
+
+---
+
+### **14. Jenkins**  
+1. **Q:** What is a Jenkins pipeline?  
+   **A:** A scripted or declarative workflow for CI/CD.  
+
+2. **Q:** How do you define a Declarative Pipeline?  
+   **A:** Using a `Jenkinsfile` with `pipeline`, `agent`, and `stages` blocks.  
+
+3. **Q:** What is the purpose of the `agent` directive?  
+   **A:** Specifies where the pipeline runs (e.g., `any`, `docker`).  
+
+4. **Q:** What is a Jenkinsfile?  
+   **A:** A text file storing the pipeline configuration.  
+
+5. **Q:** How do you trigger a Jenkins job on Git commit?  
+   **A:** Use webhooks or SCM polling.  
+
+6. **Q:** What is a Jenkins workspace?  
+   **A:** The directory where the project is checked out and built.  
+
+7. **Q:** How do you parameterize a Jenkins job?  
+   **A:** Use the `Parameters` section (e.g., string, choice parameters).  
+
+8. **Q:** What is Blue Ocean in Jenkins?  
+   **A:** A modern UI for visualizing pipelines.  
+
+9. **Q:** How do you handle secrets in Jenkins?  
+   **A:** Use the "Credentials" store (e.g., username/password, SSH keys).  
+
+10. **Q:** What is the difference between Scripted and Declarative Pipelines?  
+    **A:** Declarative uses a structured syntax; Scripted uses Groovy for flexibility.  
+
+11. **Q:** How do you run a parallel stage?  
+    **A:**  
+    ```groovy
+    stages {
+        stage('Parallel') {
+            parallel {
+                stage('Test1') { ... }
+                stage('Test2') { ... }
+            }
+        }
+    }
+    ```
+
+12. **Q:** What is the purpose of the `post` block?  
+    **A:** Defines actions after stages (e.g., cleanup, notifications).  
+
+13. **Q:** How do you archive artifacts in Jenkins?  
+    **A:** Use the `archiveArtifacts` step:  
+    ```groovy
+    archiveArtifacts artifacts: '**/target/*.jar'
+    ```
+
+14. **Q:** What is a Jenkins shared library?  
+    **A:** Reusable Groovy code stored in a repository for pipelines.  
+
+15. **Q:** How do you restart Jenkins?  
+    **A:** Use `/safeRestart` via the web UI or touch the `restart` file in `JENKINS_HOME`.  
+
+16. **Q:** What is the purpose of the `Jenkinsfile` `environment` block?  
+    **A:** Defines environment variables for the pipeline.  
+
+17. **Q:** How do you integrate Jenkins with GitHub?  
+    **A:** Use the GitHub plugin and webhooks.  
+
+18. **Q:** What is a Jenkins agent?  
+    **A:** A machine/node that executes pipeline tasks.  
+
+19. **Q:** How do you handle pipeline failures?  
+    **A:** Use `post { failure { ... } }` or `catchError` in Scripted Pipelines.  
+
+20. **Q:** What is the purpose of the `input` step?  
+    **A:** Pauses the pipeline for user approval (e.g., production deployment).  
+
+---
