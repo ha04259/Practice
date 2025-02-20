@@ -194,3 +194,161 @@ Test cookbooks locally using Vagrant/VirtualBox.
 - **Books**: _Chef Infrastructure Automation_ by John Ewart.
 
 By mastering these concepts, you can automate complex infrastructure tasks efficiently! 🚀
+
+Here’s a step-by-step guide to creating a Chef cookbook, performing syntax checks, dry-run tests, and deploying it to a node. Includes all required commands:
+
+---
+
+### **1. Create a Cookbook**
+Generate a new cookbook structure using `chef generate`:
+
+```bash
+chef generate cookbook my_cookbook
+cd my_cookbook
+```
+
+---
+
+### **2. Write a Recipe**
+Edit the default recipe (`recipes/default.rb`). Example:  
+```ruby
+# Install Apache and start the service
+package 'apache2' do
+  action :install
+end
+
+service 'apache2' do
+  action [:enable, :start]
+end
+
+# Create a sample HTML file
+file '/var/www/html/index.html' do
+  content '<h1>Hello from Chef!</h1>'
+  mode '0644'
+end
+```
+
+---
+
+### **3. Syntax & Style Checks**
+#### **Lint the Cookbook**  
+Check for Ruby/Chef syntax errors and best practices:  
+```bash
+cookstyle .
+```
+
+#### **Validate Metadata**  
+Ensure `metadata.rb` is valid:  
+```bash
+knife cookbook metadata -o .
+```
+
+---
+
+### **4. Dry-Run (Why-Run) Test**
+Simulate the Chef run without making actual changes:  
+```bash
+# Run in local mode (replace NODE_NAME with your node's name)
+chef-client --why-run --local-mode --override-runlist 'my_cookbook'
+```
+
+---
+
+### **5. Test with Test Kitchen**
+Test the cookbook locally using Vagrant/VM.
+
+#### **Configure `.kitchen.yml`**  
+Update the file to:  
+```yaml
+driver:
+  name: vagrant
+
+provisioner:
+  name: chef_zero
+
+platforms:
+  - name: ubuntu-20.04
+
+suites:
+  - name: default
+    run_list:
+      - recipe[my_cookbook::default]
+```
+
+#### **Run Tests**  
+```bash
+# Start the VM and apply the cookbook
+kitchen converge
+
+# Verify the setup (optional: write InSpec tests in test/integration/default/)
+kitchen verify
+
+# Destroy the VM after testing
+kitchen destroy
+```
+
+---
+
+### **6. Deploy to Nodes**
+#### **Upload the Cookbook to Chef Server**  
+```bash
+knife cookbook upload my_cookbook
+```
+
+#### **Bootstrap a Node (if new)**  
+Replace `<NODE_IP>`, `<USER>`, and `<PASSWORD>` with your node’s details:  
+```bash
+knife bootstrap <NODE_IP> -N node1 -x <USER> -P <PASSWORD> --sudo --run-list 'recipe[my_cookbook]'
+```
+
+#### **Apply to Existing Node**  
+Add the cookbook to the node’s run list:  
+```bash
+knife node run_list add <NODE_NAME> 'recipe[my_cookbook]'
+```
+
+Trigger a Chef Client run on the node:  
+```bash
+# SSH into the node and run:
+sudo chef-client
+```
+
+---
+
+### **7. Example Workflow**
+1. **Create the cookbook**:  
+   ```bash
+   chef generate cookbook deploy_webapp
+   ```
+
+2. **Write recipes and test locally**:  
+   ```bash
+   cookstyle .
+   chef-client --why-run --local-mode
+   ```
+
+3. **Test in Kitchen**:  
+   ```bash
+   kitchen converge && kitchen verify
+   ```
+
+4. **Deploy**:  
+   ```bash
+   knife cookbook upload deploy_webapp
+   knife node run_list add web_server 'recipe[deploy_webapp]'
+   ```
+
+---
+
+### **Key Commands Summary**
+| Task                | Command                                                                 |
+|---------------------|-------------------------------------------------------------------------|
+| Create Cookbook     | `chef generate cookbook COOKBOOK_NAME`                                  |
+| Lint                | `cookstyle .`                                                          |
+| Dry Run             | `chef-client --why-run --local-mode --override-runlist 'COOKBOOK_NAME'`|
+| Test Kitchen Deploy | `kitchen converge`                                                     |
+| Upload Cookbook     | `knife cookbook upload COOKBOOK_NAME`                                  |
+| Bootstrap Node      | `knife bootstrap NODE_IP -N NODE_NAME -x USER -P PASSWORD --sudo`      |
+
+---
+
